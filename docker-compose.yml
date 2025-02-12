@@ -1,0 +1,38 @@
+services:
+    web:
+        image: nginx:latest
+        container_name: property-search-nginx
+        restart: unless-stopped
+        ports:
+            - "8080:80"
+        volumes:
+            - ./:/var/www
+            - ./.docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+            - ./.docker/nginx/nginx.crt:/etc/ssl/nginx.crt
+            - ./.docker/nginx/nginx.key:/etc/ssl/nginx.key
+        links:
+            - php
+    php:
+        build: ./.docker/php
+        container_name: property-search-php
+        restart: unless-stopped
+        tty: true
+        volumes:
+            - ./:/var/www
+            - ./.docker/php/ini/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+        links:
+            - db
+    db:
+        image: mysql:8.0
+        command: --default-authentication-plugin=mysql_native_password
+        container_name: property-search-mysql
+        restart: unless-stopped
+        ports:
+            - "3307:3306"
+        volumes:
+            - ./.docker/mysql:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: property-search
+            MYSQL_USER: property-search
+            MYSQL_PASSWORD: SqxL5BaFxjneppD3
