@@ -44,11 +44,11 @@ class House extends Model
 
     public function scopePriceFrom(Builder $builder, int $priceFrom): Builder
     {
-        return $builder->where('price_from', '>=', $priceFrom);
+        return $builder->where('price', '>=', $priceFrom);
     }
 
     public function scopePriceTo(Builder $builder, int $priceTo): Builder
     {
-        return $builder->where('price_to', '<=', $priceTo);
+        return $builder->where('price', '<=', $priceTo);
     }
 }
