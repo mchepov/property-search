@@ -25,7 +25,7 @@ class GetHousesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'keyword' => 'nullable|string',
+            'keywords' => 'nullable|string',
             'bedrooms' => self::RULE_NULLABLE_INTEGER,
             'bathrooms' => self::RULE_NULLABLE_INTEGER,
             'garages' => self::RULE_NULLABLE_INTEGER,
