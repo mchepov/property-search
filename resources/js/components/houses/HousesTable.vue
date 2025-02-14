@@ -83,5 +83,12 @@
                 </tr>
             </tbody>
         </table>
+
+        <div
+            v-else
+            class="text-center text-xs text-slate-400 bg-slate-50 p-4"
+        >
+            No items found.
+        </div>
     </div>
 </template>
